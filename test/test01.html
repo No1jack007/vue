@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            color: red;
+        }
+
+        .line {
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    {{ message }}<br/>
+    <ul>
+        <li v-for="(item,index) in movies">{{index+1}}.{{item}}</li>
+    </ul>
+    <h2>当前计数：{{counter}}</h2>
+    <h2 v-once>初始值：{{counter}}</h2>
+    <button v-on:click="counter++">+</button>
+    <button v-on:click="counter--">-</button>
+    <button v-on:click="add">++</button>
+    <button @click="sub">--</button>
+    <h2 v-html="url"></h2>
+    <h2 v-text="message"></h2>
+    <h2 v-pre>{{ movies }}</h2>
+    <img v-bind:src="imgURL">
+    <h2 v-bind:class="{active:isActive,line:isLine}">{{ message }}</h2>
+    <button v-on:click="btnClick">按钮</button>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            movies: ['复仇者联盟', '美国队长', '钢铁侠', '雷神'],
+            counter: 0,
+            url: '<a href="http://www.baidu.com">百度一下</a>',
+            imgURL: '../image/01.jpg',
+            isActive: true,
+            isLine: true,
+            firstName: 'zhang',
+            lastName: 'yufei'
+        },
+        methods: {
+            add: function () {
+                console.log('add被执行')
+                this.counter++
+            },
+            sub: function () {
+                console.log('sub执行')
+                this.counter--
+            },
+            btnClick: function () {
+                this.isActive = !this.isActive
+                this.isLine = !this.isLine
+            },
+            getFullName() {
+                return this.firstName + '  ' + this.lastName
+            }
+        },
+        //计算属性
+        computed: {
+            fullName: {
+                set:function () {
+                    
+                },
+                get:function () {
+                    return this.firstName + '  ' + this.lastName
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
