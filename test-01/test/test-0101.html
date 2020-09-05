@@ -20,7 +20,8 @@
     <ul>
         <li v-for="(item,index) in movies"
             :class="{active: currentIndex==index}"
-            @click="liClick(index)">{{index+1}}.{{item}}</li>
+            @click="liClick(index)">{{index+1}}.{{item}}
+        </li>
     </ul>
     <h2>当前计数：{{counter}}</h2>
     <h2 v-once>初始值：{{counter}}</h2>
@@ -36,9 +37,42 @@
     <button v-on:click="btnClick">按钮</button>
     <h2>{{getFullName()}}</h2>
     <h2>{{fullName}}</h2>
+    <input type="text" v-model="message">
+    <br>
+    <label for="male">
+        <input type="radio" id="male" value="男" v-model="sex">男
+    </label>
+    <label for="female">
+        <input type="radio" id="female" value="女" v-model="sex">女
+    </label>
+    <input type="radio" id="secret" value="保密" v-model="sex">保密
+    <br>
+    <label for="agree">
+        <input type="checkbox" id="agree" v-model="agree">同意协议
+    </label>
+    您选择的是：{{agree}}
+    <button :disabled="!agree">下一步</button>
+    <br>
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+    <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+    您的爱好是{{hobbies}}
+    <br>
+    <select name="abc" id="" v-model="fruits" multiple>
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="荔枝">荔枝</option>
+    </select>
+    您选择的水果是{{fruits}}
+    <br>
+    <label v-for="item in movies" v-bind:for="item">
+        <input type="checkbox" v-bind:value="item" v-bind:id="item" v-model="selectMovie">{{item}}
+    </label>
+    选中电影{{selectMovie}}
 </div>
 
-<script src="../js/vue.js"></script>
+<script src="../../vue-js/vue.js"></script>
 <script>
     const app = new Vue({
         el: '#app',
@@ -52,7 +86,12 @@
             isActive: true,
             isLine: true,
             firstName: 'zhang',
-            lastName: 'yufei'
+            lastName: 'yufei',
+            sex: '保密',
+            agree: 'false',
+            hobbies: [],
+            fruits: [],
+            selectMovie: []
         },
         methods: {
             add: function () {
@@ -70,8 +109,8 @@
             getFullName() {
                 return this.firstName + '  ' + this.lastName
             },
-            liClick(index){
-                this.currentIndex=index
+            liClick(index) {
+                this.currentIndex = index
             }
         },
         //计算属性

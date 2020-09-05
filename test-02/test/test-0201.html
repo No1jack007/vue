@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <my-cpn></my-cpn>
+    <cpn2></cpn2>
+    <cpn3></cpn3>
+    <cpn4></cpn4>
+    <cpn5></cpn5>
+    <cpn6></cpn6>
+</div>
+
+<script type="text/x-template" id="cpn4">
+    <div>
+        <h2>我是标题</h2>
+        <p>组件分离text/x-template</p>
+    </div>
+</script>
+
+<template id="cpn5">
+    <div>
+        <h2>我是标题</h2>
+        <p>组件分离template</p>
+    </div>
+</template>
+
+<template id="cpn6">
+    <div>
+        <h2>我是标题</h2>
+        <p>组件分离{{content}}</p>
+    </div>
+</template>
+
+<script src="../../vue-js/vue.js"></script>
+<script>
+    //1.创建组件构造器
+    const cpnC = Vue.extend({
+        template: `
+        <div>
+            <h2>我是标题</h2>
+            <p>段落1</p>
+        </div>
+        `
+    })
+    const cpnC2 = Vue.extend({
+        template: `
+        <div>
+            <h2>我是标题</h2>
+            <p>父组件</p>
+            <cpn></cpn>
+        </div>
+        `,
+        components: {
+            cpn: cpnC
+        }
+    })
+    //2.注册组件
+    //全局组件
+    Vue.component('my-cpn', cpnC)
+    //语法糖注册方式
+    Vue.component('cpn3', {
+        template: `
+        <div>
+            <h2>我是标题</h2>
+            <p>语法糖</p>
+            <cpn></cpn>
+        </div>
+    `
+    })
+    //分离组件文件
+    Vue.component('cpn4', {
+        template: '#cpn4'
+    })
+    Vue.component('cpn5', {
+        template: '#cpn5'
+    })
+    Vue.component('cpn6', {
+        template: '#cpn6',
+        data(){
+            return {
+                content:'-data自带数据'
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        //私有组件
+        components: {
+            cpn: cpnC,
+            cpn2: cpnC2
+        }
+    })
+</script>
+</body>
+</html>
