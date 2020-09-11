@@ -7,10 +7,10 @@
 <body>
 
 <div id="app">
-    <cpn1 v-bind:cmovies="movies" v-bind:cmessage="message"></cpn1>
+    <cpn v-bind:cmovies="movies" v-bind:cmessage="message"></cpn>
 </div>
 
-<template id="cpn1">
+<template id="cpn">
     <div>
         <h2>{{cmessage}}</h2>
         <p>{{cmovies}}</p>
@@ -19,20 +19,20 @@
 
 <script src="../../vue-js/vue.js"></script>
 <script>
-    const cpn1={
+    const cpn = {
         template: '#cpn1',
-        props:['cmovies','cmessage'],
+        props: ['cmovies', 'cmessage'],
     }
 
     const app = new Vue({
         el: '#app',
         data: {
             message: 'Hello Vue!',
-            movies:['海王','海贼王','海尔兄弟']
+            movies: ['海王', '海贼王', '海尔兄弟']
         },
         //私有组件
         components: {
-            cpn1
+            'cpn': cpn
         }
     })
 </script>
