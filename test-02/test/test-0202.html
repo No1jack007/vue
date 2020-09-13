@@ -14,14 +14,20 @@
     <div>
         <h2>{{cmessage}}</h2>
         <p>{{cmovies}}</p>
+        <button v-for="item in cmovies" @click="btnClick(item)">{{item}}</button>
     </div>
 </template>
 
 <script src="../../vue-js/vue.js"></script>
 <script>
     const cpn = {
-        template: '#cpn1',
+        template: '#cpn',
         props: ['cmovies', 'cmessage'],
+        methods: {
+            btnClick(item) {
+                console.log(item);
+            }
+        }
     }
 
     const app = new Vue({
