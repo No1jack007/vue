@@ -7,7 +7,7 @@
 <body>
 
 <div id="app">
-    <cpn v-bind:cmovies="movies" v-bind:cmessage="message"></cpn>
+    <cpn v-bind:cmovies="movies" v-bind:cmessage="message" v-on:item-click="cpnClick"></cpn>
 </div>
 
 <template id="cpn">
@@ -26,6 +26,7 @@
         methods: {
             btnClick(item) {
                 console.log(item);
+                this.$emit('item-click',item)
             }
         }
     }
@@ -39,6 +40,11 @@
         //私有组件
         components: {
             'cpn': cpn
+        },
+        methods: {
+            cpnClick(item){
+                console.log("点击子组件:"+item);
+            }
         }
     })
 </script>
