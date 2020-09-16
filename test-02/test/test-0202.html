@@ -8,6 +8,9 @@
 
 <div id="app">
     <cpn v-bind:cmovies="movies" v-bind:cmessage="message" v-on:item-click="cpnClick"></cpn>
+    <cpn1></cpn1>
+    <button @click="btmClick">按钮</button>
+    <cpn1 ref="c1"></cpn1>
 </div>
 
 <template id="cpn">
@@ -15,6 +18,12 @@
         <h2>{{cmessage}}</h2>
         <p>{{cmovies}}</p>
         <button v-for="item in cmovies" @click="btnClick(item)">{{item}}</button>
+    </div>
+</template>
+
+<template id="cpn1">
+    <div>
+        我是子组件
     </div>
 </template>
 
@@ -26,7 +35,7 @@
         methods: {
             btnClick(item) {
                 console.log(item);
-                this.$emit('item-click',item)
+                this.$emit('item-click', item)
             }
         }
     }
@@ -39,11 +48,31 @@
         },
         //私有组件
         components: {
-            'cpn': cpn
+            'cpn': cpn,
+            cpn1: {
+                template: '#cpn1',
+                methods: {
+                    showMessage() {
+                        console.log('showMessage');
+                    }
+                },
+                data() {
+                    return {
+                        name: '我是子组件name'
+                    }
+                }
+            }
+
         },
         methods: {
-            cpnClick(item){
-                console.log("点击子组件:"+item);
+            cpnClick(item) {
+                console.log("点击子组件:" + item);
+            },
+            btmClick() {
+                console.log(this.$children)
+                this.$children[1].showMessage()
+                console.log(this.$children[1].name)
+                console.log(this.$refs.c1.name)
             }
         }
     })
