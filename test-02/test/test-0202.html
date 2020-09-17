@@ -11,6 +11,11 @@
     <cpn1></cpn1>
     <button @click="btmClick">按钮</button>
     <cpn1 ref="c1"></cpn1>
+    <cpn1>
+        <br>
+        <button>插槽</button>
+        <span slot="left">聚名插槽</span>
+    </cpn1>
 </div>
 
 <template id="cpn">
@@ -24,6 +29,8 @@
 <template id="cpn1">
     <div>
         我是子组件
+        <slot></slot>
+        <slot name="left"></slot>
     </div>
 </template>
 
