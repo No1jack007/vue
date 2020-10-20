@@ -17,7 +17,7 @@ const app2=new Vue({
     }
 })
 
-import App3 from './vue/app3.vue'
+import App3 from './vue/App3.vue'
 
 const app3=new Vue({
     el:'#app3',
