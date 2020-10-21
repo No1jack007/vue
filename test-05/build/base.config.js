@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: './src/main.js', //需要打包的文件
     output: {
-        path: path.resolve(__dirname, 'dist'), //指定生成的文件目录
+        path: path.resolve(__dirname, '../dist'), //指定生成的文件目录
         filename: 'bundle.js',    //输入的文件名是什么，生成的文件名也是什么
     },
     module: {
@@ -45,10 +45,6 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: 'index.html'
         })
-    ],
-    devServer: {
-        contentBase: './dist',
-        inline: true
-    }
+    ]
 
 }
