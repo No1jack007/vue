@@ -12,7 +12,7 @@ const Profile = () => import ('../components/Profile')
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     // {
     //   path: '/',
@@ -27,6 +27,9 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: {
+        title: '首页'
+      },
       children: [
         {
           path: 'news',
@@ -40,20 +43,44 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      meta: {
+        title: '关于'
+      }
     },
     {
       path: '/user/:userId',
       name: 'user',
-      component: User
+      component: User,
+      meta: {
+        title: '用户'
+      }
     },
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,
+      meta: {
+        title: '档案'
+      }
     }
   ],
   mode: 'history'
 })
+
+//路由导航
+//前置守卫
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  console.log('前置守卫')
+  next()
+})
+
+//后置守卫
+router.afterEach((to, from) => {
+  console.log('后置守卫')
+})
+
+export default router
 
 
